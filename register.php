@@ -10,12 +10,12 @@ if($member_id=is_login($link)){
 if(isset($_POST['submit'])){
 include_once 'inc/check_member.inc.php';
 $_POST=escape($link,$_POST);
-$query="insert into sfk_member(name,pw,register_time) values('{$_POST['name']}',md5('{$_POST['pw']}'),now())";
+$query="insert into kiwier_member(name,pw,register_time) values('{$_POST['name']}',md5('{$_POST['pw']}'),now())";
 execute($link,$query);
 if(mysqli_affected_rows($link)==1){
     //check if user is login in 
-    // setcookie('sfk[name]',$_POST['name']);
-    // setcookie('sfk[pw]', sha1(md5($_POST['pw'])));
+    // setcookie('kiwier[name]',$_POST['name']);
+    // setcookie('kiwier[pw]', sha1(md5($_POST['pw'])));
     skip('login.php','ok','Register successful');
 }else {
     skip('register.php','error','Please register again');
@@ -36,7 +36,7 @@ if(mysqli_affected_rows($link)==1){
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -50,7 +50,7 @@ if(mysqli_affected_rows($link)==1){
 			<?php
 //                 if(isset($member_id) && $member_id){
 // $str=<<<A
-//                     <p>Hi, {$_COOKIE['sfk']['name']}</p> 
+//                     <p>Hi, {$_COOKIE['kiwier']['name']}</p> 
                     
 // A;
 //                     echo $str;
@@ -69,7 +69,7 @@ echo $str;
 	</div>
 	<div style="margin-top:55px;"></div>
 	<div id="register" class="auto">
-		<h2>Hi, Welcome to SFK</h2>
+		<h2>Hi, Welcome to kiwier</h2>
 		<form method="post">
 			<label>User Name：<input type="text" name="name"  /><span>*Not Accept over 30 Characters</span></label>
 			<label>Password：<input type="password" name="pw"  /><span>*Not Accept over 20 Characters</span></label>
@@ -82,9 +82,9 @@ echo $str;
 	</div>
 	<div id="footer" class="auto">
 		<div class="bottom">
-			<a>SFK</a>
+			<a>Kiwier</a>
 		</div>
-		<div class="copyright">Powered by sifangku ©2020 sifangku.com</div>
+		<div class="copyright">Powered by Kiwier ©2020 kiwier.com</div>
 	</div>
 </body>
 </html>

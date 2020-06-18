@@ -9,7 +9,7 @@ if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
     skip('father_module.php','error',"Sorry, No ID existed!");
 }
 
-$query="select * from sfk_father_module where id={$_GET['id']}";
+$query="select * from kiwier_father_module where id={$_GET['id']}";
 $result=execute($link,$query);
 // //check if this query is existed in the database
 if(!mysqli_num_rows($result)){
@@ -22,7 +22,7 @@ $raw_data=$data['module_name'];
 if(isset($_POST['submit'])){
     $check_flag="modify";
     include_once 'inc/check_father_module.inc.php';
-    $query="update sfk_father_module set module_name='{$_POST['module_name']}',sort={$_POST['sort']} where id={$_GET['id']}";
+    $query="update kiwier_father_module set module_name='{$_POST['module_name']}',sort={$_POST['sort']} where id={$_GET['id']}";
     execute($link,$query);
     if(mysqli_affected_rows($link)==1){
         skip('father_module.php','ok','Updated Successfully!');

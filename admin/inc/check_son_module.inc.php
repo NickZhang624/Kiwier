@@ -10,7 +10,7 @@ if($_POST['father_module_id']<=0 or !is_numeric($_POST['father_module_id'])){
 
 //check main block if it is existed
 if($check_flag=='add'){
-    $query="select * from sfk_father_module where id='{$_POST['father_module_id']}'";
+    $query="select * from kiwier_father_module where id='{$_POST['father_module_id']}'";
     $result=execute($link,$query);
     if(mysqli_num_rows($result)==0){
 	skip('son_module_add.php','error','Main block is not existed!');
@@ -20,7 +20,7 @@ if($check_flag=='add'){
 //check second block if it is existed
 if($check_flag=='add'){
     $_POST=escape($link,$_POST);
-    $query="select * from sfk_son_module where module_name='{$_POST['module_name']}'";
+    $query="select * from kiwier_son_module where module_name='{$_POST['module_name']}'";
     $result=execute($link,$query);
     if(mysqli_num_rows($result)){
 	skip('son_module_add.php','error','Second block name is already existed!');
@@ -76,7 +76,7 @@ if(!is_numeric($_POST['sort'])){
 if($check_flag=='modify'){
     // check new data whether it is existed
     $_POST=escape($link,$_POST);
-    $query="select * from sfk_son_module where father_module_id={$_POST['father_module_id']} and module_name ='{$_POST['module_name']}'";
+    $query="select * from kiwier_son_module where father_module_id={$_POST['father_module_id']} and module_name ='{$_POST['module_name']}'";
     $result=execute($link,$query);
     //true
     if(mysqli_num_rows($result)){

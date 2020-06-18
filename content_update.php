@@ -13,7 +13,7 @@ if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
     skip('index.php','error','Sorry, please try it again');
 }
 
-$qeury="select * from sfk_content where id={$_GET['id']}";
+$qeury="select * from kiwier_content where id={$_GET['id']}";
 $result=execute($link,$qeury);
 if(mysqli_num_rows($result)==1){
 	$data=mysqli_fetch_assoc($result);
@@ -23,7 +23,7 @@ if(mysqli_num_rows($result)==1){
 			if(isset($_POST['submit'])){
 				include_once 'inc/check_update.php';
 				$_POST=escape($link,$_POST);
-				$query="update sfk_content set module_id={$_POST['module_id']}, title='{$_POST['title']}', content='{$_POST['content']}' where id={$_GET['id']}";
+				$query="update kiwier_content set module_id={$_POST['module_id']}, title='{$_POST['title']}', content='{$_POST['content']}' where id={$_GET['id']}";
 				execute($link,$query);
 				if(mysqli_affected_rows($link)==1){
 					if(isset($_GET['R'])){
@@ -61,7 +61,7 @@ if(mysqli_num_rows($result)==1){
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -94,11 +94,11 @@ A;
 		<form method="post">
 			<select name="module_id">
                 <?php
-                $query="select * from sfk_father_module order by sort desc";
+                $query="select * from kiwier_father_module order by sort desc";
                 $result_father=execute($link,$query);
                 while($data_father=mysqli_fetch_assoc($result_father)){
                     echo "<optgroup label='{$data_father['module_name']}'>";
-                    $query="select * from sfk_son_module where father_module_id={$data_father['id']} order by sort desc";
+                    $query="select * from kiwier_son_module where father_module_id={$data_father['id']} order by sort desc";
                     $result_son=execute($link,$query);
                     while($data_son=mysqli_fetch_assoc($result_son)){
 						if($data_son['id']==$data['module_id']){
@@ -120,9 +120,9 @@ A;
 	</div>
 	<div id="footer" class="auto">
 		<div class="bottom">
-			<a>sfk</a>
+			<a>Kiwier</a>
 		</div>
-		<div class="copyright">Powered by sifangku ©2015 sifangku.com</div>
+		<div class="copyright">Powered by Kiwier ©2020 kiwier.com</div>
 	</div>
 </body>
 </html>

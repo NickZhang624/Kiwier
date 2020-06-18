@@ -11,7 +11,7 @@ $member_id=is_login($link);
 if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
 	skip('index.php','error','Sorry this user is not existed');
 }
-$query="select * from sfk_member where id = {$_GET['id']}";
+$query="select * from kiwier_member where id = {$_GET['id']}";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)!=1){
     skip('index.php','error','Sorry this user is not existed');
@@ -19,7 +19,7 @@ if(mysqli_num_rows($result)!=1){
 
 $data_member=mysqli_fetch_assoc($result);
 
-$query="select count(*) from sfk_content where member_id = {$_GET['id']}";
+$query="select count(*) from kiwier_content where member_id = {$_GET['id']}";
 $count_all=num($link,$query);
 
 //set up image path
@@ -46,7 +46,7 @@ $arr_path=$arr_path['5'].'/'.$arr_path['6'];
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -61,7 +61,7 @@ $arr_path=$arr_path['5'].'/'.$arr_path['6'];
              if($member_id){
                   
 $str=<<<A
-<a>Hi, {$_COOKIE['sfk']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
+<a>Hi, {$_COOKIE['kiwier']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
                     
 A;
                     echo $str;
@@ -87,14 +87,14 @@ echo $str;
 		<ul class="postsList">
 			<?php 
 			$page=page($count_all,4);
-            $query="select sfk_content.title,sfk_content.id,sfk_content.time,sfk_content.numbers,sfk_member.name,sfk_member.photo,sfk_content.member_id from 
-            sfk_content,sfk_member where 
-            sfk_content.member_id={$_GET['id']} and 
-            sfk_content.member_id=sfk_member.id order by id desc {$page['limit']}";
+            $query="select kiwier_content.title,kiwier_content.id,kiwier_content.time,kiwier_content.numbers,kiwier_member.name,kiwier_member.photo,kiwier_content.member_id from 
+            kiwier_content,kiwier_member where 
+            kiwier_content.member_id={$_GET['id']} and 
+            kiwier_content.member_id=kiwier_member.id order by id desc {$page['limit']}";
             $result_content=execute($link, $query);
 			while($data_content=mysqli_fetch_assoc($result_content)){
 				$data_content['title']=htmlspecialchars($data_content['title']);
-				$query="select time from sfk_reply where content_id={$data_content['id']} order by id desc limit 1";
+				$query="select time from kiwier_reply where content_id={$data_content['id']} order by id desc limit 1";
 				$result_last_reply=execute($link, $query);
 				if(mysqli_num_rows($result_last_reply)==0){
 					$last_time='No reply';
@@ -102,7 +102,7 @@ echo $str;
 					$data_last_reply=mysqli_fetch_assoc($result_last_reply);
 					$last_time=$data_last_reply['time'];
 				}
-                $query="select count(*) from sfk_reply where content_id={$data_content['id']}";
+                $query="select count(*) from kiwier_reply where content_id={$data_content['id']}";
 			?>
 			<li>
 				<div class="smallPic">
@@ -169,9 +169,9 @@ echo $str;
 </div>
 <div id="footer" class="auto">
 		<div class="bottom">
-			<a>SFK</a>
+			<a>kiwier</a>
 		</div>
-		<div class="copyright">Powered by sifangku ©2015 sifangku.com</div>
+		<div class="copyright">Powered by Kiwier ©2020 kiwier.com</div>
 	</div>
 </body>
 </html>

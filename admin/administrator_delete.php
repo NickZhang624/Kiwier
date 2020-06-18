@@ -8,7 +8,7 @@ include_once 'inc/check_administrator_login.inc.php';
 if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
     skip('administrator.php','error','Sorry, please try it again');
 }
-$qeury="select sfk_manage.level from sfk_manage where id={$_SESSION['administrator']['id']}";
+$qeury="select kiwier_manage.level from kiwier_manage where id={$_SESSION['administrator']['id']}";
 $result=execute($link,$qeury);
 $data=mysqli_fetch_assoc($result);
 if(mysqli_affected_rows($link)!==1){
@@ -20,7 +20,7 @@ if(mysqli_affected_rows($link)!==1){
 }
 
 
-$qeury="delete from sfk_manage where id={$_GET['id']}";
+$qeury="delete from kiwier_manage where id={$_GET['id']}";
 execute($link,$qeury);
 if(mysqli_affected_rows($link)==1){
     skip('administrator.php','ok','Congratulation, delete sucessfully!');

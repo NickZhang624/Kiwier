@@ -13,7 +13,7 @@ if(!$member_id=is_login($link)){
 if(!isset($_GET['id']) || !is_numeric($_GET['id']) || !isset($_GET['quote_id']) || !is_numeric($_GET['quote_id'])){
     skip("show_content.php?id={$_GET['id']}",'error','Sorry this reply is not existed');
 }
-$query="select * from sfk_content,sfk_reply where sfk_content.id = {$_GET['id']} and sfk_reply.id={$_GET['quote_id']}";
+$query="select * from kiwier_content,kiwier_reply where kiwier_content.id = {$_GET['id']} and kiwier_reply.id={$_GET['quote_id']}";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)!=1){
     skip('index.php','error','Sorry this post is not existed');
@@ -24,10 +24,10 @@ $data_post['title']=htmlspecialchars($data_post['title']);
 $data_post['content']=nl2br(htmlspecialchars($data_post['content']));
 
 
-$query="select count(*) from sfk_reply where content_id={$_GET['id']} and id <={$_GET['quote_id']}";
+$query="select count(*) from kiwier_reply where content_id={$_GET['id']} and id <={$_GET['quote_id']}";
 $i=num($link,$query);
 
-$query="select * from sfk_member where id = {$data_post['member_id']}";
+$query="select * from kiwier_member where id = {$data_post['member_id']}";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)!=1){
     skip('index.php','error','Sorry this post is not existed');
@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
 include_once 'inc/check_reply.php';
 $_POST=escape($link,$_POST);
 $_SESSION['contents']=$_POST['content'];
-$query="insert into sfk_reply(content_id,quote_id,content,time,member_id) values({$_GET['id']},{$_GET['quote_id']},'{$_POST['content']}',now(),{$member_id})";
+$query="insert into kiwier_reply(content_id,quote_id,content,time,member_id) values({$_GET['id']},{$_GET['quote_id']},'{$_POST['content']}',now(),{$member_id})";
 execute($link,$query);
 if(mysqli_affected_rows($link)==1){
     unset($_SESSION['contents']);
@@ -63,7 +63,7 @@ if(mysqli_affected_rows($link)==1){
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -77,7 +77,7 @@ if(mysqli_affected_rows($link)==1){
             <?php
                 if($member_id){
 $str=<<<A
-<a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['sfk']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
+<a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['kiwier']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
                     
 A;
                     echo $str;
@@ -104,9 +104,9 @@ A;
 	</div>
 	<div id="footer" class="auto">
 		<div class="bottom">
-			<a>SFK</a>
+			<a>Kiwier</a>
 		</div>
-		<div class="copyright">Powered by sifangku ©2015 sifangku.com</div>
+		<div class="copyright">Powered by Kiwier ©2020 kiwier.com</div>
 	</div>
 </body>
 </html>

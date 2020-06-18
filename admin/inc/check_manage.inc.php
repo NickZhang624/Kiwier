@@ -16,7 +16,7 @@ if(mb_strlen($_POST['pw'])>20){
 }
 
 $_POST=escape($link,$_POST);
-    $query="select * from sfk_manage where name='{$_POST['name']}'";
+    $query="select * from kiwier_manage where name='{$_POST['name']}'";
     $result=execute($link,$query);
     if(mysqli_num_rows($result)){
 	skip('manage_add.php','error','This name is already taken');

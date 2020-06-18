@@ -12,10 +12,6 @@
 	<div class="logo">
 		Control
 	</div>
-	<!-- <ul class="nav">
-		<li><a href="http://www.sifangku.com" target="_blank">私房库</a></li>
-		<li><a href="http://www.sifangku.com" target="_blank">私房库</a></li>
-	</ul> -->
 	<div class="login_info">
 		<a href="../index.php" target="_blank" style="color:#fff;">Website Homepage</a>&nbsp;|&nbsp;
 		Administrator: <?php echo $_SESSION['administrator']['name']?> <a href="logout.php">[Sign Out]</a>

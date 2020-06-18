@@ -11,7 +11,7 @@ if(isset($_POST['submit'])){
     //check user's input
     include_once 'inc/check_son_module.inc.php';
 
-    $query="insert into sfk_son_module(father_module_id,module_name,info,member_id,sort) 
+    $query="insert into kiwier_son_module(father_module_id,module_name,info,member_id,sort) 
     values({$_POST['father_module_id']},'{$_POST['module_name']}','{$_POST['info']}',{$_POST['member_id']},{$_POST['sort']})";
     execute($link,$query);
     if(mysqli_affected_rows($link)==1){
@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
                         <select name="father_module_id">
                             <option value="0">Please choose a Main block</option>
                             <?php
-                            $query='select * from sfk_father_module';
+                            $query='select * from kiwier_father_module';
                             $data=execute($link,$query);
                             while($data_father_module=mysqli_fetch_assoc($data)){
                                 echo "<option value='{$data_father_module['id']}'>{$data_father_module['module_name']}</option>";

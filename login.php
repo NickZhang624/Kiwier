@@ -10,11 +10,11 @@ if($member_id=is_login($link)){
 if(isset($_POST['submit'])){
 include_once 'inc/check_login.inc.php';
 $_POST=escape($link,$_POST);
-$query="select * from sfk_member where name='{$_POST['name']}' and pw=md5('{$_POST['pw']}')";
+$query="select * from kiwier_member where name='{$_POST['name']}' and pw=md5('{$_POST['pw']}')";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)==1){
-    setcookie('sfk[name]',$_POST['name'],time()+$_POST['time']);
-    setcookie('sfk[pw]', sha1(md5($_POST['pw'])),time()+$_POST['time']);
+    setcookie('kiwier[name]',$_POST['name'],time()+$_POST['time']);
+    setcookie('kiwier[pw]', sha1(md5($_POST['pw'])),time()+$_POST['time']);
     skip('index.php','ok','Login in successful');
 }else {
     skip('login.php','error','Sorry, Please enter your username and password');
@@ -35,7 +35,7 @@ if(mysqli_num_rows($result)==1){
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -49,7 +49,7 @@ if(mysqli_num_rows($result)==1){
 			<?php
 //                 if(isset($member_id) && $member_id){
 // $str=<<<A
-//                     <p>Hi, {$_COOKIE['sfk']['name']}</p> 
+//                     <p>Hi, {$_COOKIE['kiwier']['name']}</p> 
                     
 // A;
 //                     echo $str;
@@ -68,7 +68,7 @@ echo $str;
 	</div>
 	<div style="margin-top:55px;"></div>
 	<div id="register" class="auto">
-		<h2>Hi, Welcome to SFK</h2>
+		<h2>Hi, Welcome to Kiwier</h2>
 		<form method="post">
 			<label>User Name*：<input type="text" name="name"  /><span></span></label>
 			<label>Password*：<input type="password" name="pw"  /><span></span></label>
@@ -89,9 +89,9 @@ echo $str;
 	</div>
 	<div id="footer" class="auto">
 		<div class="bottom">
-			<a>SFK</a>
+			<a>Kiwier</a>
 		</div>
-		<div class="copyright">Powered by sifangku ©2020 sifangku.com</div>
+		<div class="copyright">Powered by Kiwier ©2020 kiwier.com</div>
 	</div>
 </body>
 </html>

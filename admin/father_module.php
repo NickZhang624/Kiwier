@@ -4,7 +4,7 @@ include_once '../inc/mysql.inc.php';
 include_once '../inc/tool.inc.php';
 $link=connect();
 include_once 'inc/check_administrator_login.inc.php';
-$query='select * from sfk_father_module';
+$query='select * from kiwier_father_module';
 $result=execute($link,$query);
 ?>
 <?php include_once 'inc/header.inc.php';?>

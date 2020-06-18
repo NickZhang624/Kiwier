@@ -7,7 +7,7 @@ include_once 'inc/check_administrator_login.inc.php';
 if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
     skip('son_module.php','error','Sorry, please try it again');
 }
-$qeury="delete from sfk_son_module where id={$_GET['id']}";
+$qeury="delete from kiwier_son_module where id={$_GET['id']}";
 execute($link,$qeury);
 if(mysqli_affected_rows($link)==1){
     skip('son_module.php','ok','Congradtulation, delete sucessfully!');

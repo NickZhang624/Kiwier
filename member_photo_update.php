@@ -8,15 +8,15 @@ $link=connect();
 if(!$member_id=is_login($link)){
     skip('login.php','error','Please login in first');
 }
-$query="select * from sfk_member where id={$member_id}";
+$query="select * from kiwier_member where id={$member_id}";
 $result=execute($link,$query);
 $data=mysqli_fetch_assoc($result);
 
 if(isset($_POST['submit'])){
-    $path='/opt/lampp/htdocs/sfkbbs/style/';
+    $path='/opt/lampp/htdocs/kiwierbbs/style/';
     $upload=upload($path,'40M','photo');
     if($upload['return']){
-        $query="update sfk_member set photo='{$upload['path']}' where id={$member_id}";
+        $query="update kiwier_member set photo='{$upload['path']}' where id={$member_id}";
         execute($link,$query);
         if(mysqli_affected_rows($link)==1){
             skip("member.php?id={$member_id}",'ok','upload sucessfully!'); 

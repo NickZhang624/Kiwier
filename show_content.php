@@ -11,7 +11,7 @@ $member_id=is_login($link);
 if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
 	skip('index.php','error','Sorry this post is not existed');
 }
-$query="select * from sfk_content where id = {$_GET['id']}";
+$query="select * from kiwier_content where id = {$_GET['id']}";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)!=1){
     skip('index.php','error','Sorry this post is not existed');
@@ -25,21 +25,21 @@ $data_post['content']=nl2br(htmlspecialchars($data_post['content']));
 // show real-time views
 $data_post['numbers']=$data_post['numbers']+1;
 
-$query="select * from sfk_son_module where id = {$data_post['module_id']}";
+$query="select * from kiwier_son_module where id = {$data_post['module_id']}";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)!=1){
     skip('index.php','error','Sorry this post is not existed');
 }
 $data_son=mysqli_fetch_assoc($result);
 
-$query="select * from sfk_father_module where id = {$data_son['father_module_id']}";
+$query="select * from kiwier_father_module where id = {$data_son['father_module_id']}";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)!=1){
     skip('index.php','error','Sorry this post is not existed');
 }
 $data_father=mysqli_fetch_assoc($result);
 
-$query="select * from sfk_member where id = {$data_post['member_id']}";
+$query="select * from kiwier_member where id = {$data_post['member_id']}";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)!=1){
     skip('index.php','error','Sorry this post is not existed');
@@ -47,11 +47,11 @@ if(mysqli_num_rows($result)!=1){
 $data_member=mysqli_fetch_assoc($result);
 
 //add views
-$query="update sfk_content set numbers=numbers+1 where id={$_GET['id']}";
+$query="update kiwier_content set numbers=numbers+1 where id={$_GET['id']}";
 execute($link,$query);
 
 //set pages
-$query="select count(*) from sfk_reply where content_id ={$_GET['id']}";
+$query="select count(*) from kiwier_reply where content_id ={$_GET['id']}";
 $count_reply=num($link,$query);
 $page_size="5";
 $page=page($count_reply,$page_size);
@@ -71,7 +71,7 @@ $page=page($count_reply,$page_size);
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -86,7 +86,7 @@ $page=page($count_reply,$page_size);
              if($member_id){
                   
 $str=<<<A
-<a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['sfk']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>                
+<a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['kiwier']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>                
 A;
                     echo $str;
 
@@ -136,7 +136,7 @@ echo $str;
 				<div class="title">
 					<h2><?php echo $data_post['title']?></h2>
 					<?php 
-							$query="select count(*) from sfk_reply where content_id={$_GET['id']}";
+							$query="select count(*) from kiwier_reply where content_id={$_GET['id']}";
 							$result_reply_numbers=num($link,$query);
 							?>
 					<span>Views：<?php echo $data_post['numbers']?>&nbsp;|&nbsp;Reply：<?php echo $result_reply_numbers?></span>
@@ -157,10 +157,10 @@ echo $str;
 		?>	
 
         <?php
-        $query="select sfk_reply.quote_id,sfk_reply.id,sfk_reply.member_id,sfk_reply.time,sfk_reply.content,sfk_member.name,sfk_member.photo from 
-        sfk_reply, sfk_member where 
-        sfk_reply.member_id = sfk_member.id and 
-        sfk_reply.content_id = {$_GET['id']} {$page['limit']}";
+        $query="select kiwier_reply.quote_id,kiwier_reply.id,kiwier_reply.member_id,kiwier_reply.time,kiwier_reply.content,kiwier_member.name,kiwier_member.photo from 
+        kiwier_reply, kiwier_member where 
+        kiwier_reply.member_id = kiwier_member.id and 
+        kiwier_reply.content_id = {$_GET['id']} {$page['limit']}";
 		$result_reply=execute($link,$query);
 		$i=($_GET['page']-1)*$page_size+1;
         while($data_reply=mysqli_fetch_assoc($result_reply)){
@@ -192,13 +192,13 @@ echo $str;
 
 					<?php
 					if(!$data_reply['quote_id']==null){
-					$query="select count(*) from sfk_reply where content_id={$_GET['id']} and id<={$data_reply['quote_id']}";
+					$query="select count(*) from kiwier_reply where content_id={$_GET['id']} and id<={$data_reply['quote_id']}";
 					$floor=num($link,$query);
-					$query="select sfk_reply.content,sfk_member.name from 
-					sfk_reply,sfk_member where 
-					sfk_reply.id={$data_reply['quote_id']} and 
-					sfk_reply.content_id={$_GET['id']} and 
-					sfk_reply.member_id=sfk_member.id";
+					$query="select kiwier_reply.content,kiwier_member.name from 
+					kiwier_reply,kiwier_member where 
+					kiwier_reply.id={$data_reply['quote_id']} and 
+					kiwier_reply.content_id={$_GET['id']} and 
+					kiwier_reply.member_id=kiwier_member.id";
 					$result_quote=execute($link,$query);
 					$data_quote=mysqli_fetch_assoc($result_quote);
 					?>
@@ -234,9 +234,9 @@ echo $str;
 	</div>
 	<div id="footer" class="auto">
 		<div class="bottom">
-			<a>SFK</a>
+			<a>Kiwier</a>
 		</div>
-		<div class="copyright">Powered by sifangku ©2015 sifangku.com</div>
+		<div class="copyright">Powered by Kiwier ©2020 kiwier.com</div>
 	</div>
 </body>
 </html>

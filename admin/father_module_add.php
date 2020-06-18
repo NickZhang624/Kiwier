@@ -11,7 +11,7 @@ if(isset($_POST['submit'])){
     include_once 'inc/check_father_module.inc.php';
     
     //add new data
-    $query="insert into sfk_father_module(module_name,sort) values('{$_POST['module_name']}',{$_POST['sort']})";
+    $query="insert into kiwier_father_module(module_name,sort) values('{$_POST['module_name']}',{$_POST['sort']})";
     execute($link,$query);
     if(mysqli_affected_rows($link)==1){
         skip('father_module.php','ok','Added Successfully!');

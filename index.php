@@ -19,7 +19,7 @@ $member_id=is_login($link);
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -53,7 +53,7 @@ echo $str;
 	</div>
 	<div style="margin-top:55px;"></div>
 	<?php
-        $query="select * from sfk_father_module order by sort desc";
+        $query="select * from kiwier_father_module order by sort desc";
         $result_father=execute($link,$query);
         while($data_father=mysqli_fetch_assoc($result_father)){
 	?>
@@ -63,13 +63,13 @@ echo $str;
 		</div>
 		<div class="classList">
 			<?php
-			$query="select * from sfk_son_module where father_module_id={$data_father['id']}";
+			$query="select * from kiwier_son_module where father_module_id={$data_father['id']}";
 			$result_son=execute($link,$query);
 			if(mysqli_num_rows($result_son)){
 				while($data_son=mysqli_fetch_assoc($result_son)){
-					$query="select count(*) from sfk_content where module_id={$data_son['id']} and time > CURDATE()";
+					$query="select count(*) from kiwier_content where module_id={$data_son['id']} and time > CURDATE()";
 					$count_today=num($link,$query);
-					$query1="select count(*) from sfk_content where module_id={$data_son['id']}";
+					$query1="select count(*) from kiwier_content where module_id={$data_son['id']}";
 					$numbers=num($link,$query1);
 					echo "<div class='childBox new'>
 					<h2><a href='list_son.php?id={$data_son['id']}'>{$data_son['module_name']}</a> <span>(Today {$count_today})</span></h2>
@@ -89,9 +89,9 @@ echo $str;
 
 	<div id="footer" class="auto">
 		<div class="bottom">
-			<a>SFK</a>
+			<a>Kiwier</a>
 		</div>
-		<div class="copyright">Powered by sifangku ©2015 sifangku.com</div>
+		<div class="copyright">Powered by Kiwier ©2020 kiwier.com</div>
 	</div>
 </body>
 </html>

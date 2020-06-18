@@ -8,8 +8,8 @@ if(!$member_id=is_login($link)){
     skip('index.php','error','Please login in first');
 }
 
-setcookie('sfk[name]','',time()-3600);
-setcookie('sfk[pw]', '',time()-3600);
+setcookie('kiwier[name]','',time()-3600);
+setcookie('kiwier[pw]', '',time()-3600);
 skip('index.php','ok','Sign out successfully!');
 
 ?>

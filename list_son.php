@@ -11,7 +11,7 @@ $member_id=is_login($link);
 if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
 	skip('index.php','error','Sorry this submodule is not existed');
 }
-$query="select * from sfk_son_module where id = {$_GET['id']}";
+$query="select * from kiwier_son_module where id = {$_GET['id']}";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)!=1){
     skip('index.php','error','Sorry this submodule is not existed');
@@ -20,13 +20,13 @@ $data_son=mysqli_fetch_assoc($result);
 
 
 //fetch content numbers and counts from content 
-$query="select count(*) from sfk_content where module_id = {$_GET['id']}";
+$query="select count(*) from kiwier_content where module_id = {$_GET['id']}";
 $count_all=num($link,$query);
-$query="select count(*) from sfk_content where module_id = {$_GET['id']} and time > CURDATE()";
+$query="select count(*) from kiwier_content where module_id = {$_GET['id']} and time > CURDATE()";
 $count_today=num($link,$query);
 
 //fetch member name
-$query="select * from sfk_member where id = {$data_son['member_id']}";
+$query="select * from kiwier_member where id = {$data_son['member_id']}";
 $result_member=execute($link,$query);
 $data_member=mysqli_fetch_assoc($result_member);
 
@@ -47,7 +47,7 @@ $page=page($count_all,10);
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -62,7 +62,7 @@ $page=page($count_all,10);
              if($member_id){
                   
 $str=<<<A
-<a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['sfk']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
+<a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['kiwier']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
                     
 A;
                     echo $str;
@@ -82,7 +82,7 @@ echo $str;
 	<div style="margin-top:55px;"></div>
 	<div id="position" class="auto">
         <?php
-        $query="select * from sfk_father_module where id = {$data_son['father_module_id']}";
+        $query="select * from kiwier_father_module where id = {$data_son['father_module_id']}";
         $result_father=execute($link,$query);
         $data_father=mysqli_fetch_assoc($result_father);
         ?>
@@ -110,10 +110,10 @@ echo $str;
 			<div style="clear:both;"></div>
 			<ul class="postsList">
 			<?php
-			$query="select sfk_content.title,sfk_content.id,sfk_content.time,sfk_content.numbers,sfk_member.name,sfk_member.photo,sfk_member.id member_id 
-			from sfk_content,sfk_member where 
-			sfk_content.module_id = {$data_son['id']} and 
-			sfk_content.member_id = sfk_member.id {$page['limit']}";
+			$query="select kiwier_content.title,kiwier_content.id,kiwier_content.time,kiwier_content.numbers,kiwier_member.name,kiwier_member.photo,kiwier_member.id member_id 
+			from kiwier_content,kiwier_member where 
+			kiwier_content.module_id = {$data_son['id']} and 
+			kiwier_content.member_id = kiwier_member.id {$page['limit']}";
 			$result_content=execute($link,$query);
 			while($data_content=mysqli_fetch_assoc($result_content)){
 				$data_content['title']=htmlspecialchars($data_content['title']);
@@ -132,7 +132,7 @@ echo $str;
 					<div class="subject">
 						<div class="titleWrap"><h2><a href="show_content.php?id=<?php echo $data_content['id']?>"><?php echo $data_content['title']?></a></h2></div>
 						<?php
-						$query="select * from sfk_reply where content_id={$data_content['id']} order by id desc limit 1";
+						$query="select * from kiwier_reply where content_id={$data_content['id']} order by id desc limit 1";
 						$result_last_reply=execute($link,$query);
 						if(mysqli_num_rows($result_last_reply)==0){
 							$last_reply="No reply";
@@ -147,7 +147,7 @@ echo $str;
 					</div>
 					<div class="count">
 					<?php 
-							$query="select count(*) from sfk_reply where content_id={$data_content['id']}";
+							$query="select count(*) from kiwier_reply where content_id={$data_content['id']}";
 							$result_reply_numbers=num($link,$query);
 							?>
 						<p>
@@ -179,7 +179,7 @@ echo $str;
 				<div class="title">Submodule List</div>
 				<ul class="listWrap">
                 <?php
-                        $query="select * from sfk_father_module";
+                        $query="select * from kiwier_father_module";
                         $result_father=execute($link,$query);
                         while($data_father=mysqli_fetch_assoc($result_father)){    
                         ?>
@@ -187,7 +187,7 @@ echo $str;
                         <h2><a href="list_father.php?id=<?php echo $data_father['id']?>"><?php echo $data_father['module_name']?></a></h2>
 						<ul>
                             <?php
-                            $query="select * from sfk_son_module where father_module_id={$data_father['id']}";
+                            $query="select * from kiwier_son_module where father_module_id={$data_father['id']}";
                             $result_son=execute($link,$query);
                             while($data_son=mysqli_fetch_assoc($result_son)){
                             ?>
@@ -207,9 +207,9 @@ echo $str;
 	</div>
 	<div id="footer" class="auto">
 		<div class="bottom">
-			<a>私房库</a>
+			<a>Kiwier</a>
 		</div>
-		<div class="copyright">Powered by sifangku ©2015 sifangku.com</div>
+		<div class="copyright">Powered by Kiwier ©2020 kiwier.com</div>
 	</div>
 </body>
 </html>

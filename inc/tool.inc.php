@@ -19,8 +19,8 @@ exit();
 }
 
 function is_login($link){
-    if(isset($_COOKIE['sfk']['name']) && isset($_COOKIE['sfk']['pw'])){
-        $query="select * from sfk_member where name='{$_COOKIE['sfk']['name']}' and sha1(pw)='{$_COOKIE['sfk']['pw']}'";
+    if(isset($_COOKIE['kiwier']['name']) && isset($_COOKIE['kiwier']['pw'])){
+        $query="select * from kiwier_member where name='{$_COOKIE['kiwier']['name']}' and sha1(pw)='{$_COOKIE['kiwier']['pw']}'";
         $result=execute($link,$query);
         if(mysqli_num_rows($result)==1){
             $data=mysqli_fetch_assoc($result);
@@ -42,7 +42,7 @@ return true;
 
 function is_login_manage($link){
     if(isset($_SESSION['administrator']['name']) && isset($_SESSION['administrator']['pw'])){
-        $query="select * from sfk_manage where name='{$_SESSION['administrator']['name']}' and sha1(pw)='{$_SESSION['administrator']['pw']}'";
+        $query="select * from kiwier_manage where name='{$_SESSION['administrator']['name']}' and sha1(pw)='{$_SESSION['administrator']['pw']}'";
         $result=execute($link,$query);
         if(mysqli_num_rows($result)==1){
             return true;

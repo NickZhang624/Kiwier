@@ -27,7 +27,7 @@ if(strtolower($_POST['vcode'])!= strtolower($_SESSION['vcode'])){
     skip('register.php','error','Please re-enter validation code');
 }
 $_POST=escape($link,$_POST);
-$query="select * from sfk_member where name='{$_POST['name']}'";
+$query="select * from kiwier_member where name='{$_POST['name']}'";
 $result=execute($link,$query);
 if(mysqli_num_rows($result)){
     skip('register.php','error','Sorry user name is already taken, please enter another name');

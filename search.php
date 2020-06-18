@@ -12,7 +12,7 @@ if(!isset($_GET['keyword'])){
 }
 $_GET['keyword']=trim($_GET['keyword']);
 $_GET['keyword']=escape($link,$_GET['keyword']);
-$query="select count(*) from sfk_content where title like '%{$_GET['keyword']}%'";
+$query="select count(*) from kiwier_content where title like '%{$_GET['keyword']}%'";
 $count_all=num($link,$query);
 
 $page=page($count_all,5);
@@ -31,7 +31,7 @@ $page=page($count_all,5);
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -45,7 +45,7 @@ $page=page($count_all,5);
                 <?php
                 if($member_id){
 $str=<<<A
-                    <a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['sfk']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
+                    <a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['kiwier']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
                     
 A;
                     echo $str;
@@ -76,16 +76,16 @@ echo $str;
 		<ul class="postsList">
 			<?php 
 			$query="select
-			sfk_content.title,sfk_content.id,sfk_content.time,sfk_content.numbers,sfk_content.member_id,sfk_member.name,sfk_member.photo
-			from sfk_content,sfk_member where
-			sfk_content.title like '%{$_GET['keyword']}%' and
-			sfk_content.member_id=sfk_member.id
+			kiwier_content.title,kiwier_content.id,kiwier_content.time,kiwier_content.numbers,kiwier_content.member_id,kiwier_member.name,kiwier_member.photo
+			from kiwier_content,kiwier_member where
+			kiwier_content.title like '%{$_GET['keyword']}%' and
+			kiwier_content.member_id=kiwier_member.id
 			{$page['limit']}";
 			$result_content=execute($link,$query);
 			while($data_content=mysqli_fetch_assoc($result_content)){
 			$data_content['title']=htmlspecialchars($data_content['title']);
 			$data_content['title_color']=str_replace($_GET['keyword'],"<span style='color:red;'>{$_GET['keyword']}</span>",$data_content['title']);
-			$query="select time from sfk_reply where content_id={$data_content['id']} order by id desc limit 1";
+			$query="select time from kiwier_reply where content_id={$data_content['id']} order by id desc limit 1";
 			$result_last_reply=execute($link, $query);
 			if(mysqli_num_rows($result_last_reply)==0){
 				$last_time='No reply';
@@ -93,7 +93,7 @@ echo $str;
 				$data_last_reply=mysqli_fetch_assoc($result_last_reply);
 				$last_time=$data_last_reply['time'];
 			}
-			$query="select count(*) from sfk_reply where content_id={$data_content['id']}";
+			$query="select count(*) from kiwier_reply where content_id={$data_content['id']}";
 			//set up image path
 			if($data_content['photo']!='0'){
 				$arr_path=explode('/',$data_content['photo']);
@@ -123,7 +123,7 @@ echo $str;
 				</div>
 				<div class="count">
 				<?php 
-							$query="select count(*) from sfk_reply where content_id={$data_content['id']}";
+							$query="select count(*) from kiwier_reply where content_id={$data_content['id']}";
 							$result_reply_numbers=num($link,$query);
 							?>
 						<p>
@@ -152,7 +152,7 @@ echo $str;
 			<div class="title">Modules</div>
 			<ul class="listWrap">
 				<?php 
-				$query="select * from sfk_father_module";
+				$query="select * from kiwier_father_module";
 				$result_father=execute($link, $query);
 				while($data_father=mysqli_fetch_assoc($result_father)){
 				?>
@@ -160,7 +160,7 @@ echo $str;
 					<h2><a href="list_father.php?id=<?php echo $data_father['id']?>"><?php echo $data_father['module_name']?></a></h2>
 					<ul>
 						<?php 
-						$query="select * from sfk_son_module where father_module_id={$data_father['id']}";
+						$query="select * from kiwier_son_module where father_module_id={$data_father['id']}";
 						$result_son=execute($link, $query);
 						while($data_son=mysqli_fetch_assoc($result_son)){
 						?>

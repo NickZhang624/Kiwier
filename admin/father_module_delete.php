@@ -7,13 +7,13 @@ include_once 'inc/check_administrator_login.inc.php';
 if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
     skip('father_module.php','error','Sorry, please try it again');
 }
-$qeury="select * from sfk_son_module where father_module_id={$_GET['id']}";
+$qeury="select * from kiwier_son_module where father_module_id={$_GET['id']}";
 $result=execute($link,$qeury);
 if(mysqli_num_rows($result)){
     skip('father_module.php','error','Sorry, please delete Second Blocks first');
 }
 
-$qeury="delete from sfk_father_module where id={$_GET['id']}";
+$qeury="delete from kiwier_father_module where id={$_GET['id']}";
 execute($link,$qeury);
 if(mysqli_affected_rows($link)==1){
     skip('father_module.php','ok','Congradtulation, delete sucessfully!');

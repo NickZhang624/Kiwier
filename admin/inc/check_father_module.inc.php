@@ -27,7 +27,7 @@ if(!is_numeric($_POST['sort'])){
 //deliver a variable to check it is adding data or updating data
 if($check_flag=='add'){
     $_POST=escape($link,$_POST);
-    $query="select * from sfk_father_module where module_name='{$_POST['module_name']}'";
+    $query="select * from kiwier_father_module where module_name='{$_POST['module_name']}'";
     $result=execute($link,$query);
     if(mysqli_num_rows($result)){
 	skip('father_module_add.php','error','This block name is already taken');
@@ -40,7 +40,7 @@ if($check_flag=='modify'){
     }
     //check new data whether it is exist
     $_POST=escape($link,$_POST);
-    $query="select * from sfk_father_module where module_name='{$_POST['module_name']}' and id!={$_GET['id']}";
+    $query="select * from kiwier_father_module where module_name='{$_POST['module_name']}' and id!={$_GET['id']}";
     $result=execute($link,$query);
     if(mysqli_num_rows($result)){
     skip("father_module_update.php?id={$_GET['id']}",'error','This block name is already taken');

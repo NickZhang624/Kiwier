@@ -5,7 +5,7 @@ include_once '../inc/tool.inc.php';
 $link=connect();
 include_once 'inc/check_administrator_login.inc.php';
 
-$query='select ssm.id son_id, ssm.module_name son_module_name, ssm.member_id, ssm.sort, sfm.module_name father_module_name from sfk_son_module ssm, sfk_father_module sfm where sfm.id=ssm.father_module_id order by sfm.id';
+$query='select ssm.id son_id, ssm.module_name son_module_name, ssm.member_id, ssm.sort, sfm.module_name father_module_name from kiwier_son_module ssm, kiwier_father_module sfm where sfm.id=ssm.father_module_id order by sfm.id';
 $result=execute($link,$query);
 
 ?>

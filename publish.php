@@ -11,7 +11,7 @@ if(!$member_id=is_login($link)){
 if(isset($_POST['submit'])){
     include_once 'inc/check_publish.inc.php';
     $_POST=escape($link,$_POST);
-    $query="insert into sfk_content(module_id,title,content,member_id,time) values({$_POST['module_id']},'{$_POST['title']}','{$_POST['content']}',{$member_id},now())";
+    $query="insert into kiwier_content(module_id,title,content,member_id,time) values({$_POST['module_id']},'{$_POST['title']}','{$_POST['content']}',{$member_id},now())";
     execute($link,$query);
     if(mysqli_affected_rows($link)==1){
 		skip('publish.php','ok','publish successful');
@@ -37,7 +37,7 @@ if(isset($_POST['submit'])){
 <body>
 	<div class="header_wrap">
 		<div id="header" class="auto">
-			<div class="logo">SFK</div>
+			<div class="logo">Kiwier</div>
 			<div class="nav">
 				<a class="hover" href="index.php">Home</a>
 			</div>
@@ -51,7 +51,7 @@ if(isset($_POST['submit'])){
                 <?php
                 if($member_id){
 $str=<<<A
-<a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['sfk']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
+<a target=_blank" href="member.php?id=$member_id">Hi, {$_COOKIE['kiwier']['name']} </a><span style="color:white">|<span> <a href="sign_out.php">Sign out</a>
                     
 A;
                     echo $str;
@@ -70,11 +70,11 @@ A;
 		<form method="post">
 			<select name="module_id">
                 <?php
-                $query="select * from sfk_father_module order by sort desc";
+                $query="select * from kiwier_father_module order by sort desc";
                 $result_father=execute($link,$query);
                 while($data_father=mysqli_fetch_assoc($result_father)){
                     echo "<optgroup label='{$data_father['module_name']}'>";
-                    $query="select * from sfk_son_module where father_module_id={$data_father['id']} order by sort desc";
+                    $query="select * from kiwier_son_module where father_module_id={$data_father['id']} order by sort desc";
                     $result_son=execute($link,$query);
                     while($data_son=mysqli_fetch_assoc($result_son)){
 						if(isset($_GET['son_module_id']) && $data_son['id']==$_GET['son_module_id']){
@@ -96,9 +96,9 @@ A;
 	</div>
 	<div id="footer" class="auto">
 		<div class="bottom">
-			<a>sfk</a>
+			<a>Kiwier</a>
 		</div>
-		<div class="copyright">Powered by sifangku ©2015 sifangku.com</div>
+		<div class="copyright">Powered by Kiwier ©2020 kiwier.com</div>
 	</div>
 </body>
 </html>

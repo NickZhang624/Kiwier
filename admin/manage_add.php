@@ -7,7 +7,7 @@ $link=connect();
 include_once 'inc/check_administrator_login.inc.php';
 if(isset($_POST['submit'])){
     include_once 'inc/check_manage.inc.php';
-    $query="insert into sfk_manage(name,pw,create_time,level) values('{$_POST['name']}',md5('{$_POST['pw']}'),now(),{$_POST['level']})";
+    $query="insert into kiwier_manage(name,pw,create_time,level) values('{$_POST['name']}',md5('{$_POST['pw']}'),now(),{$_POST['level']})";
     execute($link,$query);
     if(mysqli_affected_rows($link)==1){
         skip('administrator.php','ok','Added Successfully!');

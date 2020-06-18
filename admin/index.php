@@ -5,26 +5,26 @@ include_once '../inc/tool.inc.php';
 $link=connect();
 include_once 'inc/check_administrator_login.inc.php';
 
-$query="select * from sfk_manage where id = {$_SESSION['administrator']['id']}";
+$query="select * from kiwier_manage where id = {$_SESSION['administrator']['id']}";
 $result=execute($link,$query);
 $data=mysqli_fetch_assoc($result);
 
-$query="select count(*) from sfk_father_module";
+$query="select count(*) from kiwier_father_module";
 $count_father_module=num($link,$query);
 
-$query="select count(*) from sfk_son_module";
+$query="select count(*) from kiwier_son_module";
 $count_son_module=num($link,$query);
 
-$query="select count(*) from sfk_content";
+$query="select count(*) from kiwier_content";
 $count_content=num($link,$query);
 
-$query="select count(*) from sfk_reply";
+$query="select count(*) from kiwier_reply";
 $count_reply=num($link,$query);
 
-$query="select count(*) from sfk_member";
+$query="select count(*) from kiwier_member";
 $count_member=num($link,$query);
 
-$query="select count(*) from sfk_manage";
+$query="select count(*) from kiwier_manage";
 $count_manage=num($link,$query);
 ?>
 
@@ -65,9 +65,9 @@ $count_manage=num($link,$query);
 	
 	<div class="explain">
 		<ul>
-			<li>|- Version：sfkbbs V1.0 </li>
+			<li>|- Version：kiwierbbs V1.0 </li>
 			<li>|- Developer：Nick Zhang :))</li>
-			<li>|- Website：<a target="_blank" href="../index.php">www.sifangku.com</a></li>
+			<li>|- Website：<a target="_blank" href="../index.php">www.kiwier.com</a></li>
 		</ul>
 	</div>
 </div>

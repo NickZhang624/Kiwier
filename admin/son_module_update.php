@@ -10,7 +10,7 @@ if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
     skip('son_module.php','error',"Sorry, No ID existed!");
 }
 
-$query="select * from sfk_son_module where id={$_GET['id']}";
+$query="select * from kiwier_son_module where id={$_GET['id']}";
 $result=execute($link,$query);
 // //check if this query is existed in the database
 if(!mysqli_num_rows($result)){
@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
     $raw_data;
     $check_flag="modify";
     include_once 'inc/check_son_module.inc.php'; 
-    $query="update sfk_son_module set father_module_id={$_POST['father_module_id']},module_name='{$_POST['module_name']}',info='{$_POST['info']}',member_id={$_POST['member_id']},sort={$_POST['sort']} where id={$_GET['id']}";
+    $query="update kiwier_son_module set father_module_id={$_POST['father_module_id']},module_name='{$_POST['module_name']}',info='{$_POST['info']}',member_id={$_POST['member_id']},sort={$_POST['sort']} where id={$_GET['id']}";
     execute($link,$query);
     if(mysqli_affected_rows($link)==1){
         skip('son_module.php','ok','Updated Successfully!');
@@ -47,7 +47,7 @@ if(isset($_POST['submit'])){
                         <select name="father_module_id">
                             <option value="0">Please choose a Main block</option>
                             <?php
-                            $query='select * from sfk_father_module';
+                            $query='select * from kiwier_father_module';
                             $father_data=execute($link,$query);
                             while($data_father_module=mysqli_fetch_assoc($father_data)){
                                 if($data['father_module_id']==$data_father_module['id']){

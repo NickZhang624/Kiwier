@@ -11,7 +11,7 @@ if(is_login_manage($link)){
 if(isset($_POST['submit'])){
     include_once 'inc/check_login.inc.php';
     $_POST=escape($link,$_POST);
-    $query="select * from sfk_manage where name='{$_POST['name']}' and pw=md5('{$_POST['pw']}')";
+    $query="select * from kiwier_manage where name='{$_POST['name']}' and pw=md5('{$_POST['pw']}')";
     $result=execute($link,$query);
     if(mysqli_num_rows($result)==1){
         $data=mysqli_fetch_assoc($result);
